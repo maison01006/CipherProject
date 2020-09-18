@@ -206,7 +206,7 @@ public class CipherFrame {
 				nf.dispose(); 
 
 			}
-		});
+		}); 
 
 		nf.add(np);
 		np.add(nl);
