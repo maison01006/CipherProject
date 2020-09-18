@@ -203,7 +203,7 @@ public class CipherFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nf.dispose();
+				nf.dispose(); 
 
 			}
 		});
