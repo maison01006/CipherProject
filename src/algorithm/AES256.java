@@ -1,3 +1,4 @@
+package algorithm;
 
 
 import javax.crypto.Cipher;
@@ -10,23 +11,15 @@ import org.apache.commons.codec.binary.Base64;
 public class AES256 {
 	private static volatile AES256 INSTANCE;
 	
-	final static String secretkey = "zxcvbnmasdfghjklqwertyuiop123456";
+	static String secretkey = "";
 	static String IV ="";
-	public static AES256 getInstance() {
-		if(INSTANCE == null) {
-			synchronized (AES256.class) {
-				if(INSTANCE ==null)
-					INSTANCE = new AES256();
-			}
-		}
-		return INSTANCE;
-	}
-	private AES256() {
+
+	public AES256(String key) {
+		secretkey = key;
 		IV = secretkey.substring(0,16);
 	}
 	public static String AES_Encode(String str) throws Exception{
 		byte[] keyData = secretkey.getBytes();
-		
 		SecretKey secureKey = new SecretKeySpec(keyData,"AES");
 		
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -44,7 +37,6 @@ public class AES256 {
 		c.init(Cipher.DECRYPT_MODE, secureKey,new IvParameterSpec(IV.getBytes("UTF-8")));
 		
 		byte[] byteStr = Base64.decodeBase64(str.getBytes());
-		
 		return new String(c.doFinal(byteStr),"UTF-8");
 	}
 }
