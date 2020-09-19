@@ -171,8 +171,9 @@ public class CipherFrame {
 				try {
 					String key = sha256.SHA_Encode(tf3.getText()).substring(0, 32);
 					aes256 = new AES256(key);
-
-					ta2.setText(aes256.AES_Decode(tf2.getText()));
+					String str =tf2.getText().replaceAll(" " , "");
+					str.replaceAll("\\p{Z}", "");
+					ta2.setText(aes256.AES_Decode(str));
 				} catch (Exception e1) {
 					newFrame();
 				}
